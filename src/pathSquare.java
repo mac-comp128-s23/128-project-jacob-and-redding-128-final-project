@@ -15,9 +15,7 @@ public class pathSquare {
 
 
     public static void main(String[] args) {
-        
         pathSquare squa = new pathSquare();
-        squa.path(squa.travel);
     }
 
     public pathSquare(){
@@ -28,6 +26,7 @@ public class pathSquare {
         dragRectangle = new Rectangle(500, 0,300,500);
         dragRectangle.setFillColor(Color.BLUE);
         canvas.add(dragRectangle);
+        path(travel);
     }
 
     public Deque<Point> makePath(){
