@@ -6,7 +6,7 @@ import java.util.Deque;
 
 import edu.macalester.graphics.*;
 
-public class pathSquare {
+public class Path {
     
     private  Rectangle pathRectangle;
     private Rectangle dragRectangle;
@@ -15,10 +15,10 @@ public class pathSquare {
 
 
     public static void main(String[] args) {
-        pathSquare squa = new pathSquare();
+        Path squa = new Path();
     }
 
-    public pathSquare(){
+    public Path(){
         travel = new ArrayDeque<Point>();
         canvas = new CanvasWindow("Title", 800, 500);
         //This is the rectangle I envisioned the water defense towers being on for user
