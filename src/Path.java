@@ -12,10 +12,12 @@ public class Path {
     private Rectangle dragRectangle;
     private  Deque<Point> travel;
     private  CanvasWindow canvas;
+    private cat cat;
 
 
     public static void main(String[] args) {
         Path squa = new Path();
+        
     }
 
     public Path(){
@@ -27,6 +29,9 @@ public class Path {
         dragRectangle.setFillColor(Color.BLUE);
         canvas.add(dragRectangle);
         path(travel);
+        cat = new cat(100, 100,10);
+        cat.addToCanvas(canvas);
+        cat.moveCat(canvas, travel);
     }
 
     public Deque<Point> makePath(){
