@@ -27,7 +27,7 @@ public class Path {
         //This is the rectangle I envisioned the water defense towers being on for user
         // to drag them off of. 
         dragRectangle = new Rectangle(500, 0,300,500);
-        dragRectangle.setFillColor(Color.BLUE);
+        dragRectangle.setFillColor(Color.cyan.darker());
         finalPath.add(dragRectangle);
         path(travel);
         canvas.add(finalPath);
