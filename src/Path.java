@@ -21,7 +21,7 @@ public class Path {
         visuals.add(dragRectangle);
 
         makePath();
-        path(points);
+        makeVisuals(points);
         canvas.add(visuals);
     }
 
@@ -61,8 +61,12 @@ public class Path {
         return points;
     }
 
+    public Deque<Point> getPoints() {
+        return points;
+    }
 
-    public void path(Deque<Point> pathFollow){
+
+    public void makeVisuals(Deque<Point> pathFollow){
         //For later implementation we can have an if statement here depending on user
         //selection on what path will be used, possibly new method for it
         
@@ -71,7 +75,6 @@ public class Path {
             pathRectangle.setFillColor(Color.gray);
             pathRectangle.setCenter(point);
             visuals.add(pathRectangle);
-            //canvas.add(pathRectangle);
         }
 
     }

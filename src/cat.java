@@ -1,27 +1,23 @@
-import java.util.ArrayDeque;
 import java.util.Deque;
 
 import edu.macalester.graphics.*;
-import edu.macalester.graphics.events.Key;
-import edu.macalester.graphics.events.KeyboardEvent;
 
 
 public class Cat extends Image {
 
     private Deque<Point> pathPoints;
-    private Path path;
-    private double speed;
+    private double stepSize = 5;
     private CanvasWindow canvas;
     private double x;
     private double y;
     
 
-    public Cat(double x, double y, double speed){
+    public Cat(double x, double y, double stepSize, Path path){
         super(x,y);
         this.x = x;
         this.y = y;
-        this.speed = speed;
-        pathPoints = path.
+        this.stepSize = stepSize;
+        pathPoints = path.getPoints();
         setImagePath("orangeCat.png");
         setMaxHeight(50);
         setMaxWidth(50);
@@ -31,28 +27,23 @@ public class Cat extends Image {
         canvas.add(this);
     }
 
-    public Image getCat(){
-        return this;
-    }
-
     public Deque<Point> getPath(){
         
         return pathPoints;
     }
 
-    public void moveCat(CanvasWindow canvas, Deque<Point> path, boolean animation) throws InterruptedException{
-        for(Point point : path){
-            x = point.getX();
-            y = point.getY();
-            System.out.println("Im Moving");
-            //this.moveBy(x , y );
-            this.addToCanvas(canvas);
-            this.setCenter(x,y);
-            
-            Thread.sleep(100, 0);
-        }
+    public boolean isAtGoal() {
+        return pathPoints.isEmpty();
     }
-    
 
+    public void step() { // stop when there are no more points
+        Point center = getCenter();
+        Point target = pathPoints.peek();
 
+        if(!pathPoints.isEmpty() && center.distance(target) <= stepSize) {
+            pathPoints.pop();
+            target = pathPoints.peek();
+        }
+        setCenter(Point.interpolate(center, target, stepSize / center.distance(target)));
+    }
 }

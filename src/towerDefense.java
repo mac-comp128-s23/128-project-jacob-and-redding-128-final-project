@@ -14,7 +14,7 @@ public class towerDefense {
     private Cat cat;
     private Path path;
     private Button startGame;
-    private boolean animation = true;
+    private boolean running = false;
     private Deque<Point> maybe;
 
     public static void main(String[] args) {
@@ -23,8 +23,8 @@ public class towerDefense {
 
     public towerDefense(){
         canvas = new CanvasWindow("Tower Defense!", CANVAS_WIDTH, CANVAS_HEIGHT);
-        cat = new Cat(95,100,.10);
         path = new Path(canvas);
+        cat = new Cat(95,100,10, path);
         cat.addToCanvas(canvas);
         startGame();
 
@@ -39,19 +39,14 @@ public class towerDefense {
         startGame = new Button("Start Round");
         startGame.setCenter(440, 20);
         canvas.add(startGame);
-        startGame.onClick(()-> {
-            canvas.animate(() -> {
-                try {
-                    //canvas.animate(cat.moveCat(canvas, path.makePath(), animation););
-                    cat = new Cat(10,10,10);
-                    cat.moveCat(canvas, path.makePath(), animation);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            });
+        startGame.onClick(() -> {
+            running = true;
         });
-
+        canvas.animate(()->{
+            if(running == true) {
+                cat.step();
+            }
+        });
     }
     
 }
