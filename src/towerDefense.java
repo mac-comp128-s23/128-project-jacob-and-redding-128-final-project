@@ -40,7 +40,13 @@ public class towerDefense {
         startGame.setCenter(440, 20);
         canvas.add(startGame);
         startGame.onClick(()-> {
-            cat.moveCat(canvas, maybe, animation);
+            try {
+                cat = new cat(10,10,10);
+                cat.moveCat(canvas, path.makePath(), animation);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         });
 
     }

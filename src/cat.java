@@ -44,14 +44,17 @@ public class cat extends Image {
         return path;
     }
 
-    public void moveCat(CanvasWindow canvas, Deque<Point> path, boolean animation){
+    public void moveCat(CanvasWindow canvas, Deque<Point> path, boolean animation) throws InterruptedException{
         makePath();
         //canvas.add(cat);
         for(Point point : path){
             x = point.getX();
             y = point.getY();
             System.out.println("Im Moving");
-            this.moveBy(x , y );
+            //this.moveBy(x , y );
+            this.setCenter(x,y);
+            this.addToCanvas(canvas);
+            Thread.sleep(100, 0);
         }
     }
 
