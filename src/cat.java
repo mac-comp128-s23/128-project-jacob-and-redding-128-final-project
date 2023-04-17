@@ -52,8 +52,9 @@ public class cat extends Image {
             y = point.getY();
             System.out.println("Im Moving");
             //this.moveBy(x , y );
-            this.setCenter(x,y);
             this.addToCanvas(canvas);
+            this.setCenter(x,y);
+            
             Thread.sleep(100, 0);
         }
     }
