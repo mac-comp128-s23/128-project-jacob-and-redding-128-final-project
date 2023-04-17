@@ -7,31 +7,35 @@ import java.util.Deque;
 import edu.macalester.graphics.*;
 
 public class Path {
-    
+    private GraphicsGroup finalPath;
     private  Rectangle pathRectangle;
     private Rectangle dragRectangle;
     private  Deque<Point> travel;
     private  CanvasWindow canvas;
-    private cat cat;
 
 
-    public static void main(String[] args) {
-        Path squa = new Path();
+
+    // public static void main(String[] args) {
+    //     new Path();
         
-    }
+    // }
 
-    public Path(){
+    public Path(CanvasWindow canvas){
+        finalPath = new GraphicsGroup();
         travel = new ArrayDeque<Point>();
-        canvas = new CanvasWindow("Title", 800, 500);
+        //canvas = new CanvasWindow("Title", 800, 500);
         //This is the rectangle I envisioned the water defense towers being on for user
         // to drag them off of. 
         dragRectangle = new Rectangle(500, 0,300,500);
         dragRectangle.setFillColor(Color.BLUE);
-        canvas.add(dragRectangle);
+        finalPath.add(dragRectangle);
         path(travel);
-        cat = new cat(100, 100,10);
-        cat.addToCanvas(canvas);
-        cat.moveCat(canvas, travel);
+        canvas.add(finalPath);
+        
+    }
+
+    public void setUpPath(){
+
     }
 
     public Deque<Point> makePath(){
@@ -76,7 +80,8 @@ public class Path {
             pathRectangle = new Rectangle(0, 0, 40, 40);
             pathRectangle.setFillColor(Color.gray);
             pathRectangle.setCenter(point);
-            canvas.add(pathRectangle);
+            finalPath.add(pathRectangle);
+            //canvas.add(pathRectangle);
         }
 
     }

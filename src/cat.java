@@ -13,15 +13,21 @@ public class cat extends Image {
     private double speed;
     private cat cat;
     private CanvasWindow canvas;
+    private double x;
+    private double y;
+    
 
     public cat(double x, double y, double speed){
         super(x,y);
+        this.x = x;
+        this.y = y;
         this.speed = speed;
         path = new ArrayDeque<Point>();
-        cat = new cat(x, y, speed);
-        setImagePath("kittycatpurr.png");
-        setMaxHeight(40);
-        setMaxWidth(40);
+        //cat = new cat(x, y);
+        setImagePath("orangeCat.png");
+        setMaxHeight(50);
+        setMaxWidth(50);
+       // cat.addToCanvas(canvas);
         //moveCat(canvas);
     }
 
@@ -38,11 +44,14 @@ public class cat extends Image {
         return path;
     }
 
-    public void moveCat(CanvasWindow canvas, Deque<Point> path){
+    public void moveCat(CanvasWindow canvas, Deque<Point> path, boolean animation){
         makePath();
-        canvas.add(cat);
+        //canvas.add(cat);
         for(Point point : path){
-            cat.moveBy(point.getX(), point.getY());
+            x = point.getX();
+            y = point.getY();
+            System.out.println("Im Moving");
+            this.moveBy(x , y );
         }
     }
 
