@@ -11,7 +11,7 @@ public class towerDefense {
     public static final int CANVAS_HEIGHT = 500;
 
     private CanvasWindow canvas;
-    private cat cat;
+    private Cat cat;
     private Path path;
     private Button startGame;
     private boolean animation = true;
@@ -23,7 +23,7 @@ public class towerDefense {
 
     public towerDefense(){
         canvas = new CanvasWindow("Tower Defense!", CANVAS_WIDTH, CANVAS_HEIGHT);
-        cat = new cat(95,100,.10);
+        cat = new Cat(95,100,.10);
         path = new Path(canvas);
         cat.addToCanvas(canvas);
         startGame();
@@ -43,7 +43,7 @@ public class towerDefense {
             canvas.animate(() -> {
                 try {
                     //canvas.animate(cat.moveCat(canvas, path.makePath(), animation););
-                    cat = new cat(10,10,10);
+                    cat = new Cat(10,10,10);
                     cat.moveCat(canvas, path.makePath(), animation);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
