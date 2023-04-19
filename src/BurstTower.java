@@ -8,12 +8,12 @@ public class BurstTower extends GraphicsGroup implements Tower {
     public BurstTower(double x, double y) {
         gun.setMaxHeight(radius * 3);
         base.setMaxHeight(radius * 2);
-        gun.setCenter(0, -20);
+        gun.setCenter(0, 0);
         base.setCenter(0, 0);
         setCenter(x, y);
         add(base);
         add(gun);
-        gun.setAnchor(gun.getCenter().getX(), gun.getCenter().getY() + 20);
+        
         System.out.println("Gun anchor: " + gun.getAnchor());
         System.out.println("Gun center: " + gun.getCenter());
 
