@@ -24,7 +24,7 @@ public class towerDefense {
     public towerDefense(){
         canvas = new CanvasWindow("Tower Defense!", CANVAS_WIDTH, CANVAS_HEIGHT);
         path = new Path(canvas);
-        cat = new Cat(95,100,10, path);
+        cat = new Cat(path.getPoints().peek().getX() -50,path.getPoints().peek().getY(),10, path);
         cat.addToCanvas(canvas);
         startGame();
 
