@@ -15,6 +15,7 @@ public class Path {
     public Path(CanvasWindow canvas){
         visuals = new GraphicsGroup();
         points = new ArrayDeque<Point>();
+        
 
         dragRectangle = new Rectangle(500, 0,300,500);
         dragRectangle.setFillColor(Color.cyan.darker());

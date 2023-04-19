@@ -1,3 +1,5 @@
+import java.util.ArrayDeque;
+import java.util.ArrayDeque;
 import java.util.Deque;
 import edu.macalester.graphics.*;
 
@@ -37,5 +39,14 @@ public class Cat extends Image {
             target = pathPoints.peek();
         }
         setCenter(Point.interpolate(center, target, stepSize / center.distance(target)));
+    }
+
+    public Deque<Cat> createEnemies(int round){
+        Deque<Cat> enemies = new ArrayDeque<Cat>();
+        
+        return enemies;
+        
+        
+
     }
 }
