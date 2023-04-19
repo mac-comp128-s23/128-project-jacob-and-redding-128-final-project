@@ -54,29 +54,34 @@ public class towerDefense {
         startGame.onClick(() -> {
             raiseRound();
             running = true;
+            //cat.createEnemies(path,round);
         });
         canvas.animate(()->{
             if(running == true) {
                 cat.step();
+            
             }
         });
     }
 
     public void roundTracker(){
-        roundBackground = new Rectangle(20, 20, 155, 40);
+        roundBackground = new Rectangle(560, 20, 175, 40);
         roundBackground.setFilled(true);
         roundBackground.setFillColor(Color.white);
         roundLabel.add(roundBackground);
         roundText.setFont(FontStyle.BOLD, 30);
-        roundText.setText("round: " + round);
-        roundText.setPosition(30, 50);
+        roundText.setText("Round: " + round);
+        roundText.setPosition(570, 50);
         roundLabel.add(roundText);
         canvas.add(roundLabel);
     }
 
     public void raiseRound(){
         round++;
-        roundText.setText("round: " + round);
+        roundText.setText("Round:" + round);
+        if(round > 99){
+            roundBackground.setSize(190, 40);
+        }
     }
     
 }
