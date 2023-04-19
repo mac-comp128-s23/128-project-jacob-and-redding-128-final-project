@@ -1,21 +1,14 @@
 import java.util.Deque;
-
 import edu.macalester.graphics.*;
-
 
 public class Cat extends Image {
 
     private Deque<Point> pathPoints;
     private double stepSize = 5;
-    private CanvasWindow canvas;
-    private double x;
-    private double y;
     
 
     public Cat(double x, double y, double stepSize, Path path){
         super(x,y);
-        this.x = x;
-        this.y = y;
         this.stepSize = stepSize;
         pathPoints = path.getPoints();
         setImagePath("orangeCat.png");
@@ -28,7 +21,6 @@ public class Cat extends Image {
     }
 
     public Deque<Point> getPath(){
-        
         return pathPoints;
     }
 
