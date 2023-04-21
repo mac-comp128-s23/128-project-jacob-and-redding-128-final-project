@@ -41,12 +41,8 @@ public class towerDefense {
         startGame();
         roundTracker();
 
-<<<<<<< Updated upstream
-       
-        
-=======
-        maybe = new ArrayDeque<Point>(); //Just put this in to see movement of cat
-        maybe.addFirst(new Point(100,100));
+        //maybe = new ArrayDeque<Point>(); //Just put this in to see movement of cat
+        //maybe.addFirst(new Point(100,100));
         startGame.onClick(() -> {
             running = true;
         });
@@ -59,7 +55,6 @@ public class towerDefense {
                 towerAni.run();
             }
         });
->>>>>>> Stashed changes
         
         //cat.addToCanvas(canvas);
     }
@@ -68,7 +63,6 @@ public class towerDefense {
         startGame = new Button("Start Round");
         startGame.setCenter(440, 20);
         canvas.add(startGame);
-<<<<<<< Updated upstream
         startGame.onClick(() -> {
             raiseRound();
             running = true;
@@ -80,9 +74,6 @@ public class towerDefense {
             
             }
         });
-=======
-
->>>>>>> Stashed changes
     }
 
     public void roundTracker(){
