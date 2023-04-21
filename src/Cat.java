@@ -2,6 +2,9 @@ import java.awt.List;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
 import edu.macalester.graphics.*;
 
 public class Cat extends Image {
@@ -14,7 +17,7 @@ public class Cat extends Image {
     public Cat(double x, double y, double stepSize, Path path){
         super(x,y);
         this.stepSize = stepSize;
-        pathPoints = path.getPoints();
+        pathPoints = new ArrayDeque<Point>(path.getPoints());
         setImagePath("orangeCat.png");
         setMaxHeight(50);
         setMaxWidth(50);
@@ -56,22 +59,25 @@ public class Cat extends Image {
         return enemies;
     }
 
-    public void moveCats(Path path, int round, CanvasWindow canvas){
-        System.out.println("Running");
-        
+    public void moveCats(Path path, int round, CanvasWindow canvas) {
         ArrayList<Cat> kitties = createEnemies(path, round);
+        running = true;
+        int spacer = 1;
         for(Cat cat : kitties){
-            System.out.println("new kitty");
-            canvas.add(cat);
-            canvas.animate(()->{
-                if(running == true) {
-                    cat.step(); 
-                    //System.out.println("Cat stepping");
-                }
-            });
+            canvas.add(cat, -50-50*spacer,260);
+            spacer++;
+            animateCat(canvas, cat);
+            if(cat.getCenter().getX() > 500){
+                canvas.remove(cat);
+            }
         }
-        if(kitties.isEmpty()){
-            running = false;
-        }
+    }
+
+    public void animateCat(CanvasWindow canvas, Cat cat){
+        canvas.animate(()->{
+            if(running == true) {
+                cat.step(); 
+            }
+        });
     }
 }

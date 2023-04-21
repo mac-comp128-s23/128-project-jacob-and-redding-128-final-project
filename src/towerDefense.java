@@ -64,12 +64,6 @@ public class towerDefense {
             raiseRound();
             running = true;
             cat.moveCats(path, round,canvas);
-            //cat.createEnemies(path,round);
-        });
-        canvas.animate(()->{
-            if(running == true) {
-                cat.step(); 
-            }
         });
     }
 
