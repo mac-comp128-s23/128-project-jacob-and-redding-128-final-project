@@ -6,7 +6,6 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
-import edu.macalester.graphics.Point;
 import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.ui.Button;
 
@@ -41,8 +40,6 @@ public class towerDefense {
         startGame();
         roundTracker();
 
-        //maybe = new ArrayDeque<Point>(); //Just put this in to see movement of cat
-        //maybe.addFirst(new Point(100,100));
         startGame.onClick(() -> {
             running = true;
         });
@@ -66,12 +63,12 @@ public class towerDefense {
         startGame.onClick(() -> {
             raiseRound();
             running = true;
+            cat.moveCats(path, round,canvas);
             //cat.createEnemies(path,round);
         });
         canvas.animate(()->{
             if(running == true) {
-                cat.step();
-            
+                cat.step(); 
             }
         });
     }
