@@ -1,13 +1,11 @@
 import java.awt.Color;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
-import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.FontStyle;
-import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.GraphicsText;
-import edu.macalester.graphics.Rectangle;
-import edu.macalester.graphics.ui.Button;
+import edu.macalester.graphics.*;
+import edu.macalester.graphics.ui.*;
 
 public class towerDefense {
 
@@ -23,13 +21,19 @@ public class towerDefense {
     private GraphicsText roundText;
     private Rectangle roundBackground;
     private int round;
+
+    private Tower movingTower;
+    private List<Tower> exampleTowers;
+    private List<Tower> towers;
     
 
     public static void main(String[] args) {
         new towerDefense();
     }
 
-    public towerDefense(){
+    public towerDefense() {
+        towers = new ArrayList<>();
+        exampleTowers = new ArrayList<>(4);
         canvas = new CanvasWindow("Tower Defense!", CANVAS_WIDTH, CANVAS_HEIGHT);
         path = new Path(canvas);
         cat = new Cat(path.getPoints().peek().getX() -50,path.getPoints().peek().getY(),10, path);
@@ -43,13 +47,31 @@ public class towerDefense {
         startGame.onClick(() -> {
             running = true;
         });
-        BurstTower tower = new BurstTower(200, 200);
-        canvas.add(tower);
-        Runnable towerAni = tower.getRunningAnimation();
+
+        canvas.onMouseDown((handler) -> {
+            Point position = handler.getPosition();
+            for(Tower example : exampleTowers) {
+                if(example.testHit(position.getX(), position.getY())) {
+                    System.out.println("clicked on a tower");
+                    movingTower = example;
+                    exampleTowers.remove(movingTower);
+                }
+            }
+        });
+        canvas.onMouseUp((handler) -> {
+            towers.add(movingTower);
+            movingTower = null;
+            createSampleTowers();
+        });
+        canvas.onDrag((handler) -> {
+            if(movingTower != null) {
+                movingTower.setCenter(handler.getPosition());
+            }
+        });
+        
         canvas.animate(()->{
             if(running == true) {
                 //cat.step();
-                towerAni.run();
             }
         });
         
@@ -65,6 +87,7 @@ public class towerDefense {
             running = true;
             cat.moveCats(path, round,canvas);
         });
+        createSampleTowers();
     }
 
     public void roundTracker(){
@@ -86,5 +109,10 @@ public class towerDefense {
             roundBackground.setSize(190, 40);
         }
     }
-    
+    private void createSampleTowers() {
+        exampleTowers.clear();
+        Tower exampleBurst = new BurstTower(600, 200);
+        exampleTowers.add(exampleBurst);
+        canvas.add(exampleBurst);
+    }
 }

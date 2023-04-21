@@ -1,3 +1,5 @@
-public interface Tower {
+import edu.macalester.graphics.*;
+
+public abstract class Tower extends GraphicsGroup {
     
 }
