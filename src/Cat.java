@@ -12,6 +12,7 @@ public class Cat extends Image {
     private Deque<Point> pathPoints;
     private double stepSize = 5;
     Boolean running = true;
+    public ArrayList<Cat> enemies;
     
 
     public Cat(double x, double y, double stepSize, Path path){
@@ -35,7 +36,7 @@ public class Cat extends Image {
         return pathPoints.isEmpty();
     }
 
-    public void step() { // stop when there are no more points
+    public void step(CanvasWindow canvas) { // stop when there are no more points
         Point center = getCenter();
         Point target = pathPoints.peek();
         pathPoints.addLast(new Point (560,220));
@@ -48,11 +49,15 @@ public class Cat extends Image {
         if(pathPoints.size() == 2){
             setCenter(last);
         }
+
+        // if(getCenter().getX() > 500){  \\this causes canvas to crash
+        //     canvas.remove(this);
+        // }
     }
 
     public ArrayList<Cat> createEnemies(Path path, int round){
         double numCats = round * round ;
-        ArrayList<Cat> enemies = new ArrayList<Cat>();
+        enemies = new ArrayList<Cat>();
         while(numCats >= enemies.size()){
             enemies.add(new Cat(-50, pathPoints.getFirst().getY(), stepSize, path));
         }
@@ -67,16 +72,13 @@ public class Cat extends Image {
             canvas.add(cat, -50-50*spacer,260);
             spacer++;
             animateCat(canvas, cat);
-            if(cat.getCenter().getX() > 500){
-                canvas.remove(cat);
-            }
         }
     }
 
     public void animateCat(CanvasWindow canvas, Cat cat){
         canvas.animate(()->{
             if(running == true) {
-                cat.step(); 
+                cat.step(canvas); 
             }
         });
     }
