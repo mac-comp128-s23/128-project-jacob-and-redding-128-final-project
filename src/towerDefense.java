@@ -18,23 +18,14 @@ public class towerDefense {
     private Path path;
     private Button startGame;
     private boolean running = false;
-    private GraphicsGroup inGameText;
-    private GraphicsText roundText;
-    private Rectangle roundBackground;
+    private GraphicsGroup inGameText, gameOverGroup, catGroup;
+    private GraphicsText roundText, lifeText, startText, gameOver, gameOverScore;
+    private Rectangle roundBackground, gameOverRec, lifeBackground;
     private int round;
     private int life = 3;
-    private GraphicsText lifeText;
-    private Rectangle lifeBackground;
-    private GraphicsText startText;
-    private Rectangle gameOverRec;
-    private GraphicsText gameOver;
-    private GraphicsText gameOverScore;
-    private GraphicsGroup gameOverGroup;
     private Tower movingTower;
-    private List<Tower> exampleTowers;
-    private List<Tower> towers;
+    private List<Tower> exampleTowers, towers;
     public ArrayList<Cat> enemyList;
-    private GraphicsGroup catGroup;
     
 
     public static void main(String[] args) {
