@@ -88,7 +88,7 @@ public class towerDefense {
         
         canvas.animate(()->{
             if(running == true) {
-                //cat.step();
+                cat.moveCats(path, round, canvas);
             }
         });
         //cat.addToCanvas(canvas);
@@ -102,7 +102,7 @@ public class towerDefense {
             loselife();
             raiseRound();
             running = true;
-            cat.moveCats(path, round,canvas);
+            //cat.moveCats(path, round,canvas);
         });
         createSampleTowers();
     }

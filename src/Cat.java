@@ -71,7 +71,7 @@ public class Cat extends Image {
         for(Cat cat : kitties){
             canvas.add(cat, -50-50*spacer,260);
             spacer++;
-            animateCat(canvas, cat);
+            //animateCat(canvas, cat);
         }
     }
 
