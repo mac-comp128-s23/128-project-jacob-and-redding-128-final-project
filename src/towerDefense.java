@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import animations.AniManager;
@@ -54,7 +55,7 @@ public class towerDefense {
                 running = false; 
             }
             if(running) {
-                java.util.Iterator iter = (java.util.Iterator) enemyList.iterator();
+                Iterator<Cat> iter = (Iterator<Cat>) enemyList.iterator();
                 while(iter.hasNext()){
                     Cat cat = (Cat) iter.next();
                     canvas.add(cat);
