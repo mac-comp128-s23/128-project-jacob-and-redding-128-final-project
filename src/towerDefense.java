@@ -47,7 +47,6 @@ public class towerDefense {
         canvas = new CanvasWindow("Tower Defense!", CANVAS_WIDTH, CANVAS_HEIGHT);
         path = new Path(canvas);
         cat = new Cat(path.getPoints().peek().getX() -50,path.getPoints().peek().getY(),10, path);
-        
         inGameText = new GraphicsGroup();
         roundText = new GraphicsText();
         lifeText = new GraphicsText();
