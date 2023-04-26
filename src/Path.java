@@ -3,7 +3,6 @@
 import java.awt.Color;
 import java.util.ArrayDeque;
 import java.util.Deque;
-
 import edu.macalester.graphics.*;
 
 public class Path {
@@ -59,7 +58,6 @@ public class Path {
         return points;
     }
 
-
     public void makeVisuals(Deque<Point> pathFollow){
         for(Point point : pathFollow){
             pathRectangle = new Rectangle(0, 0, 40, 40);
@@ -67,8 +65,5 @@ public class Path {
             pathRectangle.setCenter(point);
             visuals.add(pathRectangle);
         }
-
     }
-
-
 }
