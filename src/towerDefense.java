@@ -33,6 +33,8 @@ public class towerDefense {
     private Tower movingTower;
     private List<Tower> exampleTowers;
     private List<Tower> towers;
+    public ArrayList<Cat> enemyList;
+    private GraphicsGroup catGroup;
     
 
     public static void main(String[] args) {
@@ -45,24 +47,32 @@ public class towerDefense {
         canvas = new CanvasWindow("Tower Defense!", CANVAS_WIDTH, CANVAS_HEIGHT);
         path = new Path(canvas);
         cat = new Cat(path.getPoints().peek().getX() -50,path.getPoints().peek().getY(),10, path);
-        cat.addToCanvas(canvas);
+        
         inGameText = new GraphicsGroup();
         roundText = new GraphicsText();
         lifeText = new GraphicsText();
         startText = new GraphicsText();
         gameOver = new GraphicsText();
+        gameOverScore = new GraphicsText();
+        catGroup = new GraphicsGroup();
+        gameOverGroup = new GraphicsGroup();
         
+        catGroup.add(cat);
+        canvas.add(catGroup);
         startGame();
         gameText();
         loselife();
 
-        // if(gameOver() == false){
-        //     gameOverDisplay();    \\Figure out where to place this and how to make it run
-        // }
-
-
         startGame.onClick(() -> {
+            if(life < 3){
+                gameOverDisplay();   
+            }
+            raiseRound();
+            loselife();
+            enemyList = cat.createEnemies(path, round);
             running = true;
+            moveCats(path, round, canvas);
+            
         });
 
         canvas.onMouseDown((handler) -> {
@@ -86,24 +96,36 @@ public class towerDefense {
             }
         });
         
-        canvas.animate(()->{
-            if(running == true) {
-                cat.moveCats(path, round, canvas);
+    }
+
+    public void moveCats(Path path, int round, CanvasWindow canvas) {
+        int spacer = 1;
+        // for(Cat cats : enemyList){
+        //     catGroup.add(cats);
+        //     System.out.println("added cat");
+        // }
+        // canvas.add(catGroup);
+        for(Cat cats : enemyList){
+            canvas.add(cats, -50-50*spacer,260);
+            spacer++;
+            
+            cats.step(canvas);
+            canvas.animate(()->{
+                if(running == true) {
+                    cats.step(canvas); 
+                }
+            });
+            if(cats.getCenter().getX()> 500){
+                cats.setPosition(520, 220);
+                canvas.remove(cats);
             }
-        });
-        //cat.addToCanvas(canvas);
+        }
     }
 
     public void startGame(){
         startGame = new Button("Start Round");
         startGame.setCenter(440, 20);
         canvas.add(startGame);
-        startGame.onClick(() -> {
-            loselife();
-            raiseRound();
-            running = true;
-            //cat.moveCats(path, round,canvas);
-        });
         createSampleTowers();
     }
 
@@ -131,23 +153,22 @@ public class towerDefense {
         canvas.add(inGameText);
     }
 
-    private boolean gameOver(){
-        if(life < 1){
-            return false;
-        }
-        return true;
-    }
 
     private void gameOverDisplay(){
-        gameOverRec = new Rectangle(0, 200, 480, 300);
+        gameOverRec = new Rectangle(0, 100, 500, 200);
         gameOverRec.setFilled(true);
         gameOverRec.setFillColor(Color.RED);
-        gameOver.setFont(FontStyle.BOLD, 100);
+        gameOver.setFont(FontStyle.BOLD, 76);
         gameOver.setFillColor(Color.white);
         gameOver.setText("GAME OVER!");
-        gameOver.setPosition(40, 240);
+        gameOver.setPosition(2, 200);
+        gameOverScore.setFont(FontStyle.BOLD, 30);
+        gameOverScore.setText("You made it to round: " + (round+1) + "!");
+        gameOverScore.setPosition(50,260);
+        gameOverScore.setFillColor(Color.white);
         gameOverGroup.add(gameOverRec);
         gameOverGroup.add(gameOver);
+        gameOverGroup.add(gameOverScore);
         canvas.add(gameOverGroup);
     }
 

@@ -49,8 +49,9 @@ public class Cat extends Image {
         if(pathPoints.size() == 2){
             setCenter(last);
         }
-
-        // if(getCenter().getX() > 500){  \\this causes canvas to crash
+        
+        // if(getCenter().getX() > 500){  //this causes canvas to crash
+        //     setPosition(520, 220);
         //     canvas.remove(this);
         // }
     }
@@ -64,22 +65,22 @@ public class Cat extends Image {
         return enemies;
     }
 
-    public void moveCats(Path path, int round, CanvasWindow canvas) {
-        ArrayList<Cat> kitties = createEnemies(path, round);
-        running = true;
-        int spacer = 1;
-        for(Cat cat : kitties){
-            canvas.add(cat, -50-50*spacer,260);
-            spacer++;
-            //animateCat(canvas, cat);
-        }
-    }
+    // public void moveCats(Path path, int round, CanvasWindow canvas) {
+    //     ArrayList<Cat> kitties = createEnemies(path, round);
+    //     running = true;
+    //     int spacer = 1;
+    //     for(Cat cat : kitties){
+    //         canvas.add(cat, -50-50*spacer,260);
+    //         spacer++;
+    //         //animateCat(canvas, cat);
+    //     }
+    // }
 
-    public void animateCat(CanvasWindow canvas, Cat cat){
-        canvas.animate(()->{
-            if(running == true) {
-                cat.step(canvas); 
-            }
-        });
-    }
+    // public void animateCat(CanvasWindow canvas, Cat cat){
+    //     canvas.animate(()->{
+    //         if(running == true) {
+    //             cat.step(canvas); 
+    //         }
+    //     });
+    //}
 }
