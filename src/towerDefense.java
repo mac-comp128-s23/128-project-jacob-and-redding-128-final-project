@@ -14,7 +14,7 @@ public class towerDefense {
     private Path path;
     private Button startGame;
     private boolean running = false;
-    private GraphicsGroup inGameText, gameOverGroup, catGroup;
+    private GraphicsGroup inGameText, gameOverGroup;
     private GraphicsText roundText, lifeText, startText, gameOver, gameOverScore;
     private Rectangle roundBackground, gameOverRec, lifeBackground;
     private int round;
@@ -95,14 +95,14 @@ public class towerDefense {
         });
     }
 
-    public void startGame() {
+    private void startGame() {
         startGame = new Button("Start Round");
         startGame.setCenter(440, 20);
         canvas.add(startGame);
         createSampleTowers();
     }
 
-    public void gameText() {
+    private void gameText() {
         roundBackground = new Rectangle(560, 20, 175, 40);
         roundBackground.setFilled(true);
         roundBackground.setFillColor(Color.white);
