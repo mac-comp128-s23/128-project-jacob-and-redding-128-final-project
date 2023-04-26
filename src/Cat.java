@@ -9,6 +9,7 @@ import edu.macalester.graphics.*;
 
 public class Cat extends Image {
 
+    private static final int SPEED = 5;
     private Deque<Point> pathPoints;
     private double stepSize = 5;
     Boolean running = true;
@@ -36,7 +37,7 @@ public class Cat extends Image {
         return pathPoints.isEmpty();
     }
 
-    public void step(CanvasWindow canvas) { // stop when there are no more points
+    public void step(CanvasWindow canvas) { 
         Point center = getCenter();
         Point target = pathPoints.peek();
         pathPoints.addLast(new Point (560,220));
@@ -49,38 +50,23 @@ public class Cat extends Image {
         if(pathPoints.size() == 2){
             setCenter(last);
         }
-        
-        // if(getCenter().getX() > 500){  //this causes canvas to crash
-        //     setPosition(520, 220);
-        //     canvas.remove(this);
-        // }
     }
 
     public ArrayList<Cat> createEnemies(Path path, int round){
         double numCats = round * round ;
         enemies = new ArrayList<Cat>();
         while(numCats >= enemies.size()){
-            enemies.add(new Cat(-50, pathPoints.getFirst().getY(), stepSize, path));
+            enemies.add(new Cat(-50, pathPoints.getFirst().getY(), SPEED, path));
         }
+        addEnemiesToCanvas(getCanvas(), enemies);
         return enemies;
     }
 
-    // public void moveCats(Path path, int round, CanvasWindow canvas) {
-    //     ArrayList<Cat> kitties = createEnemies(path, round);
-    //     running = true;
-    //     int spacer = 1;
-    //     for(Cat cat : kitties){
-    //         canvas.add(cat, -50-50*spacer,260);
-    //         spacer++;
-    //         //animateCat(canvas, cat);
-    //     }
-    // }
-
-    // public void animateCat(CanvasWindow canvas, Cat cat){
-    //     canvas.animate(()->{
-    //         if(running == true) {
-    //             cat.step(canvas); 
-    //         }
-    //     });
-    //}
+    private void addEnemiesToCanvas(CanvasWindow canvas, ArrayList<Cat> l ){
+        int spacer = 1;
+        for(Cat cat : l){
+            canvas.add(cat, -50-50*spacer,260);
+            spacer++;
+        }
+    }
 }

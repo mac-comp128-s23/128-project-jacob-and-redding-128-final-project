@@ -61,7 +61,10 @@ public class towerDefense {
         startGame();
         gameText();
         loselife();
+        run();
+    }
 
+    private void run(){
         startGame.onClick(() -> {
             if(life < 3){
                 gameOverDisplay();   
@@ -70,8 +73,16 @@ public class towerDefense {
             loselife();
             enemyList = cat.createEnemies(path, round);
             running = true;
-            moveCats(path, round, canvas);
-            
+            canvas.animate(()->{
+                for(Cat cats : enemyList){
+                    if(running) {
+                        cats.step(canvas); 
+                    }
+                    // if(cats.getCenter().getX()> 500){
+                    //     canvas.remove(cats);
+                    // }
+                }
+            });
         });
 
         canvas.onMouseDown((handler) -> {
@@ -94,31 +105,6 @@ public class towerDefense {
                 movingTower.setCenter(handler.getPosition());
             }
         });
-        
-    }
-
-    public void moveCats(Path path, int round, CanvasWindow canvas) {
-        int spacer = 1;
-        // for(Cat cats : enemyList){
-        //     catGroup.add(cats);
-        //     System.out.println("added cat");
-        // }
-        // canvas.add(catGroup);
-        for(Cat cats : enemyList){
-            canvas.add(cats, -50-50*spacer,260);
-            spacer++;
-            
-            cats.step(canvas);
-            canvas.animate(()->{
-                if(running == true) {
-                    cats.step(canvas); 
-                }
-            });
-            if(cats.getCenter().getX()> 500){
-                cats.setPosition(520, 220);
-                canvas.remove(cats);
-            }
-        }
     }
 
     public void startGame(){
