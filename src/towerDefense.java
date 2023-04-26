@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+
+import animations.AniManager;
 import edu.macalester.graphics.*;
 import edu.macalester.graphics.ui.*;
 
@@ -22,12 +24,14 @@ public class towerDefense {
     private Tower movingTower;
     private List<Tower> exampleTowers, towers;
     public ArrayList<Cat> enemyList;
+    private AniManager aniManager;
     
     public static void main(String[] args) {
         new towerDefense();
     }
 
     public towerDefense() {
+        aniManager = new AniManager(canvas);
         towers = new ArrayList<>();
         exampleTowers = new ArrayList<>(4);
         canvas = new CanvasWindow("Tower Defense!", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -153,7 +157,7 @@ public class towerDefense {
     }
     private void createSampleTowers() {
         exampleTowers.clear();
-        Tower exampleBurst = new BurstTower(600, 200);
+        Tower exampleBurst = new BurstTower(600, 200, aniManager);
         exampleTowers.add(exampleBurst);
         canvas.add(exampleBurst);
     }
