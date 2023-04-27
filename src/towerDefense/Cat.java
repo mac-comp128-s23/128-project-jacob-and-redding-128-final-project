@@ -22,10 +22,6 @@ public class Cat extends Image {
         setMaxWidth(50);
     }
 
-    public void addToCanvas(CanvasWindow canvas) {
-        canvas.add(this);
-    }
-
     public Deque<Point> getPath() {
         return pathPoints;
     }
@@ -45,8 +41,8 @@ public class Cat extends Image {
         setCenter(Point.interpolate(center, target, stepSize / center.distance(target)));
     }
 
-    public ArrayList<Cat> createEnemies(Path path, int round) {
-        double numCats = round * round ;
+    public ArrayList<Cat> createEnemies(Path path, int round) { // TODO: should this be in the main class?
+        double numCats = round * round;
         enemies = new ArrayList<Cat>();
         while(numCats >= enemies.size()){
             enemies.add(new Cat(-50, pathPoints.getFirst().getY(), stepSize, path));
@@ -55,7 +51,7 @@ public class Cat extends Image {
         return enemies;
     }
 
-    private void addEnemiesToCanvas(CanvasWindow canvas, ArrayList<Cat> catList ) {
+    private void addEnemiesToCanvas(CanvasWindow canvas, ArrayList<Cat> catList ) { //see above comment
         int spacer = 1;
         for(Cat cat : catList){
             canvas.add(cat, -50-50*spacer,260);

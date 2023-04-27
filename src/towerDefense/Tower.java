@@ -2,9 +2,22 @@ package towerDefense;
 
 import java.util.List;
 
-import edu.macalester.graphics.*;
+import edu.macalester.graphics.GraphicsGroup;
 
-public abstract class Tower extends GraphicsGroup {
-    abstract Cat step(double dt, List<Cat> cats);
-    abstract double getRange();
+public interface Tower {
+    /**
+     * Per-frame behavior of a tower. Returns cats which can be removed from canvas.
+     * @param dt
+     * @param cats
+     * @return
+     */
+    Cat step(double dt, List<Cat> cats);
+
+    double getRange();
+
+    /**
+     * Returns the tower's visual information.
+     * @return
+     */
+    GraphicsGroup getGroup();
 }

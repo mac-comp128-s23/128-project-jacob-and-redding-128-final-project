@@ -41,7 +41,7 @@ public class TowerDefense {
         exampleTowers = new ArrayList<>(4);
         path = new Path(canvas);
         cat = new Cat(path.getPoints().peek().getX() - 50, path.getPoints().peek().getY(), 5, path);
-        cat.addToCanvas(canvas); // smell
+        canvas.add(cat);
         inGameText = new GraphicsGroup();
         roundText = new GraphicsText();
         lifeText = new GraphicsText();
@@ -73,21 +73,21 @@ public class TowerDefense {
             Iterator<Tower> itr = exampleTowers.iterator();
             while (itr.hasNext()) {
                 Tower next = itr.next();
-                if (next.testHit(position.getX(), position.getY())) {
+                if (next.getGroup().testHit(position.getX(), position.getY())) {
                     movingTower = next;
 
                     towerRange = new Ellipse(0, 0, movingTower.getRange() * 2, movingTower.getRange() * 2);
                     towerRange.setFillColor(new Color(0, 255, 255, 100));
-                    towerRange.setCenter(movingTower.getCenter());
+                    towerRange.setCenter(movingTower.getGroup().getCenter());
                     canvas.add(towerRange);
-                    canvas.add(movingTower);
+                    canvas.add(movingTower.getGroup());
                     itr.remove();
                 }
             }
         });
         canvas.onDrag((handler) -> { // drag and...
             if (movingTower != null) {
-                movingTower.setCenter(handler.getPosition());
+                movingTower.getGroup().setCenter(handler.getPosition());
                 towerRange.setCenter(handler.getPosition());
             }
         });
@@ -167,7 +167,7 @@ public class TowerDefense {
         exampleTowers.clear();
         Tower exampleBurst = new BurstTower(600, 200, aniManager);
         exampleTowers.add(exampleBurst);
-        canvas.add(exampleBurst);
+        canvas.add(exampleBurst.getGroup());
     }
 
     private int getLife() {
