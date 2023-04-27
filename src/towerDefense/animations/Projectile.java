@@ -1,10 +1,9 @@
-import animations.Animation;
+package towerDefense.animations;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Point;
-
-import src.Helpers;
+import towerDefense.Helpers;
 
 public class Projectile extends GraphicsGroup implements Animation {
     private final double movementRate = 5, radius = 5, upperXBound, upperYBound;

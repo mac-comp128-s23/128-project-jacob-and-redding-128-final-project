@@ -1,4 +1,4 @@
-package animations;
+package towerDefense.animations;
 
 public interface Animation {
 

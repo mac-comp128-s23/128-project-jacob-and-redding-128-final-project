@@ -1,6 +1,8 @@
+package towerDefense;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+
 import edu.macalester.graphics.*;
 
 public class Cat extends Image {

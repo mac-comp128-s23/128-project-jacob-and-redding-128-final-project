@@ -1,7 +1,9 @@
+package towerDefense;
 import java.util.List;
 
-import animations.AniManager;
 import edu.macalester.graphics.*;
+import towerDefense.animations.AniManager;
+import towerDefense.animations.Projectile;
 
 public class BurstTower extends Tower {
     private final double price = 500, radius = 25, range = 100;

@@ -1,4 +1,4 @@
-package animations;
+package towerDefense.animations;
 
 import edu.macalester.graphics.GraphicsObject;
 

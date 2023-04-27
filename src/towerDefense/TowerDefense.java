@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import animations.AniManager;
+import towerDefense.animations.AniManager;
 import edu.macalester.graphics.*;
 import edu.macalester.graphics.ui.*;
 
-public class towerDefense {
+public class TowerDefense {
 
     public static final int CANVAS_WIDTH = 800;
     public static final int CANVAS_HEIGHT = 500;
@@ -28,10 +28,10 @@ public class towerDefense {
     private AniManager aniManager;
     
     public static void main(String[] args) {
-        new towerDefense();
+        new TowerDefense();
     }
 
-    public towerDefense() {
+    public TowerDefense() {
         aniManager = new AniManager(canvas);
         towers = new ArrayList<>();
         exampleTowers = new ArrayList<>(4);

@@ -1,4 +1,4 @@
-package animations;
+package towerDefense.animations;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
