@@ -11,7 +11,7 @@ public class Path {
     private Rectangle dragRectangle;
     private  Deque<Point> points;
 
-    public Path(CanvasWindow canvas){
+    public Path(){
         visuals = new GraphicsGroup();
         points = new ArrayDeque<Point>();
         dragRectangle = new Rectangle(500, 0,300,500);
@@ -19,7 +19,6 @@ public class Path {
         visuals.add(dragRectangle);
         makePath();
         makeVisuals(points);
-        canvas.add(visuals);
     }
 
     public Deque<Point> makePath(){
@@ -65,5 +64,8 @@ public class Path {
             pathRectangle.setCenter(point);
             visuals.add(pathRectangle);
         }
+    }
+    public GraphicsGroup getVisuals() {
+        return visuals;
     }
 }

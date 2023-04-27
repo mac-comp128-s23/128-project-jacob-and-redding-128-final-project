@@ -40,7 +40,7 @@ public class Cat extends Image {
         pathPoints.addLast(new Point (560,220));
         if(!pathPoints.isEmpty() && center.distance(target) <= stepSize) {
             pathPoints.pop();
-            target = pathPoints.peek();     
+            target = pathPoints.peek();
         }
         setCenter(Point.interpolate(center, target, stepSize / center.distance(target)));
     }

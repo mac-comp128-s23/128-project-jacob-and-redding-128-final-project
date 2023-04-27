@@ -39,7 +39,8 @@ public class TowerDefense {
         aniManager = new AniManager(canvas);
         towers = new ArrayList<>();
         exampleTowers = new ArrayList<>(4);
-        path = new Path(canvas);
+        path = new Path();
+        canvas.add(path.getVisuals());
         cat = new Cat(path.getPoints().peek().getX() - 50, path.getPoints().peek().getY(), 5, path, aniManager);
         canvas.add(cat);
         inGameText = new GraphicsGroup();
@@ -77,7 +78,7 @@ public class TowerDefense {
                     movingTower = next;
 
                     towerRange = new Ellipse(0, 0, movingTower.getRange() * 2, movingTower.getRange() * 2);
-                    towerRange.setFillColor(new Color(0, 255, 255, 100));
+                    towerRange.setFillColor(Helpers.CLEAR_BLUE_SKIES);
                     towerRange.setCenter(movingTower.getGroup().getCenter());
                     canvas.add(towerRange);
                     canvas.add(movingTower.getGroup());
@@ -89,6 +90,11 @@ public class TowerDefense {
             if (movingTower != null) {
                 movingTower.getGroup().setCenter(handler.getPosition());
                 towerRange.setCenter(handler.getPosition());
+                if(path.getVisuals().testHit(towerRange.getCenter().getX(), towerRange.getCenter().getY())) {
+                    towerRange.setFillColor(Helpers.ERROR_CODE_RED);
+                } else {
+                    towerRange.setFillColor(Helpers.CLEAR_BLUE_SKIES);
+                }
             }
         });
         canvas.onMouseUp((handler) -> { // drop!
