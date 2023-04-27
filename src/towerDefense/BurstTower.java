@@ -29,9 +29,9 @@ public class BurstTower implements Tower {
     }
 
     @Override
-    public Cat step(double dt, List<Cat> cats) {
+    public void step(double dt, List<Cat> cats) {
         if (group.getCanvas() == null) {
-            return null;
+            return;
         }
         timeElapsed += dt;
         if (timeElapsed >= fireRate) {
@@ -44,14 +44,14 @@ public class BurstTower implements Tower {
                 }
             }
             if (target == null) {
-                return null;
+                return;
             }
             gun.setRotation(Math.toDegrees(target.getCenter().subtract(group.getCenter()).angle()) + 90);
 
             aniManager.add(new Projectile(group.getCenter(), target.getCenter(), cats, group.getCanvas()));
-            return target;
+            return;
         }
-        return null;
+        return;
     }
 
     public double getRange() {

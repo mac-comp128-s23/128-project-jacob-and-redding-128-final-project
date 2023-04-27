@@ -1,6 +1,7 @@
 package towerDefense.animations;
 
 import java.awt.Color;
+import java.util.Iterator;
 import java.util.List;
 
 import edu.macalester.graphics.CanvasWindow;
@@ -11,13 +12,12 @@ import towerDefense.*;
 
 public class Projectile extends GraphicsGroup implements Animation {
     private final double movementRate = 5, radius = 5, upperXBound, upperYBound;
-    private final Point destination, delta;
+    private final Point delta;
     private final List<Cat> targets;
     private final CanvasWindow canvas;
 
     public Projectile(Point origin, Point destination, List<Cat> targets, CanvasWindow canvas) {
         this.targets = targets;
-        this.destination = destination;
         this.upperXBound = canvas.getWidth();
         this.upperYBound = canvas.getHeight();
         this.canvas = canvas;
@@ -43,12 +43,14 @@ public class Projectile extends GraphicsGroup implements Animation {
             canvas.remove(this);
             return true;
         }
-        for(Cat cat : targets) {
-            //check collision
-            //set cat hit
-            //??
-            //remove
-            //return true
+        Iterator<Cat> itr = targets.iterator();
+        while(itr.hasNext()) {
+            Cat cat = itr.next();
+            if(cat.getCenter().distance(getCenter()) < cat.getRadius() + 10) {
+                cat.hit();
+                canvas.remove(this);
+                return true;
+            }
         }
         moveBy(delta);
         return false;

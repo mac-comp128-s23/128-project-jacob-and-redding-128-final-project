@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Deque;
 
 import edu.macalester.graphics.*;
+import towerDefense.animations.AniManager;
+import towerDefense.animations.Delay;
 
 public class Cat extends Image {
 
@@ -12,9 +14,11 @@ public class Cat extends Image {
     private double stepSize = 5;
     private boolean running = true, isHit = false;
     public ArrayList<Cat> enemies;
+    private AniManager aniManager;
     
-    public Cat(double x, double y, double stepSize, Path path) {
+    public Cat(double x, double y, double stepSize, Path path, AniManager aniManager) {
         super(x,y);
+        this.aniManager = aniManager;
         this.stepSize = stepSize;
         pathPoints = new ArrayDeque<Point>(path.getPoints());
         setImagePath("orangeCat.png");
@@ -39,17 +43,13 @@ public class Cat extends Image {
             target = pathPoints.peek();     
         }
         setCenter(Point.interpolate(center, target, stepSize / center.distance(target)));
-
-        if(pathPoints.isEmpty()) {
-            canvas.remove(this);
-        }
     }
 
     public ArrayList<Cat> createEnemies(Path path, int round) { // TODO: should this be in the main class?
         double numCats = round * round;
         enemies = new ArrayList<Cat>();
         while(numCats >= enemies.size()) {
-            enemies.add(new Cat(-50, pathPoints.getFirst().getY(), stepSize, path));
+            enemies.add(new Cat(-50, pathPoints.getFirst().getY(), stepSize, path, aniManager));
         }
         addEnemiesToCanvas(getCanvas(), enemies);
         return enemies;
@@ -67,7 +67,7 @@ public class Cat extends Image {
         isHit = true;
         pathPoints.clear();
         pathPoints.offer(getCenter().withX(-300));
-
+        setScale(-1, 1);
     }
     public boolean isHit() {
         return isHit;

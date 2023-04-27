@@ -40,7 +40,7 @@ public class TowerDefense {
         towers = new ArrayList<>();
         exampleTowers = new ArrayList<>(4);
         path = new Path(canvas);
-        cat = new Cat(path.getPoints().peek().getX() - 50, path.getPoints().peek().getY(), 5, path);
+        cat = new Cat(path.getPoints().peek().getX() - 50, path.getPoints().peek().getY(), 5, path, aniManager);
         canvas.add(cat);
         inGameText = new GraphicsGroup();
         roundText = new GraphicsText();
@@ -92,10 +92,12 @@ public class TowerDefense {
             }
         });
         canvas.onMouseUp((handler) -> { // drop!
-            towers.add(movingTower);
-            canvas.remove(towerRange);
-            movingTower = null;
-            createSampleTowers();
+            if(movingTower != null) {
+                towers.add(movingTower);
+                canvas.remove(towerRange);
+                movingTower = null;
+                createSampleTowers();
+            }
         });
     }
 
@@ -191,16 +193,16 @@ public class TowerDefense {
                 iter.remove();
                 canvas.remove(cat);
             }
+            if (cat.isHit() && cat.getX() < 0) {
+                iter.remove();
+                canvas.remove(cat);
+            }
         }
     }
 
     private void towerBehavior(double dt) {
         for(Tower tower : towers) {
-            Cat removed = tower.step(dt, enemyList);
-            enemyList.remove(removed);
-            if(removed != null) {
-                canvas.remove(removed);
-            }
+            tower.step(dt, enemyList);
         }
     }
 }

@@ -11,7 +11,7 @@ public interface Tower {
      * @param cats
      * @return
      */
-    Cat step(double dt, List<Cat> cats);
+    void step(double dt, List<Cat> cats);
 
     double getRange();
 
