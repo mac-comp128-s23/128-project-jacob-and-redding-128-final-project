@@ -1,3 +1,5 @@
+package src;
+
 import edu.macalester.graphics.Point;
 
 public class Helpers {

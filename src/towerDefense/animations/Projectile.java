@@ -4,6 +4,8 @@ import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Point;
 
+import src.Helpers;
+
 public class Projectile extends GraphicsGroup implements Animation {
     private final double movementRate = 5, radius = 5, upperXBound, upperYBound;
     private final Point destination;
@@ -15,7 +17,8 @@ public class Projectile extends GraphicsGroup implements Animation {
         this.upperYBound = upperYBound;
         this.canvas = canvas;
         
-        add(new Ellipse(0, 0, radius * 2, radius * 2));
+        Ellipse shape = new Ellipse(0, 0, radius * 2, radius * 2);
+        add(shape);
         setCenter(origin);
         canvas.add(this);
     }
