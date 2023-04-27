@@ -1,4 +1,7 @@
 package towerDefense.animations;
+
+import java.awt.Color;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
@@ -17,6 +20,8 @@ public class Projectile extends GraphicsGroup implements Animation {
         this.canvas = canvas;
         
         Ellipse shape = new Ellipse(0, 0, radius * 2, radius * 2);
+        shape.setStroked(false);
+        shape.setFillColor(Color.BLUE);
         add(shape);
         setCenter(origin);
         canvas.add(this);

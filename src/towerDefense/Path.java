@@ -1,5 +1,4 @@
 package towerDefense;
-// package towerDefense;
 
 import java.awt.Color;
 import java.util.ArrayDeque;

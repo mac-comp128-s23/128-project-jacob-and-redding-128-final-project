@@ -1,4 +1,7 @@
 package towerDefense;
+
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import edu.macalester.graphics.*;
@@ -7,7 +10,7 @@ import towerDefense.animations.Projectile;
 
 public class BurstTower extends Tower {
     private final double price = 500, radius = 25, range = 100;
-    private final double fireRate = 0.2; //time between bursts
+    private final double fireRate = 0.5; // time between bursts
     private double timeElapsed = 0;
     private Image base = new Image("Tower.png");
     private Image gun = new Image("Cannon.png");
@@ -25,26 +28,35 @@ public class BurstTower extends Tower {
 
     }
 
+    @Override
     public Cat step(double dt, List<Cat> cats) {
-        if(getCanvas() == null) {
+        if (getCanvas() == null) {
             return null;
         }
         timeElapsed += dt;
-        if(timeElapsed >= fireRate) {
+        if (timeElapsed >= fireRate) {
             timeElapsed = 0;
             Cat target = null;
-            for(Cat cat : cats) { //TODO: order?
-                if(Helpers.isInRange(getCenter(), cat.getCenter(), range, cat.getWidth() / 2));
-                target = cat;
-                break;
+            //Collections.reverse(cats);
+            for (Cat cat : cats) {
+                if (Helpers.isInRange(getCenter(), cat.getCenter(), range, cat.getRadius())) {
+                    target = cat;
+                    break;
+                }
             }
+            if (target == null) {
+                return null;
+            }
+            gun.setRotation(Math.toDegrees(target.getCenter().subtract(getCenter()).angle()) + 90);
 
-            gun.setRotation(target.getCenter().subtract(getCenter()).angle());
-            
-            aniManager.add(new Projectile(getCenter(), target.getCenter(), 
-                            getCanvas().getWidth(), getCanvas().getHeight(), getCanvas()));
+            aniManager.add(new Projectile(getCenter(), target.getCenter(),
+                getCanvas().getWidth(), getCanvas().getHeight(), getCanvas()));
             return target;
         }
         return null;
+    }
+
+    public double getRange() {
+        return range;
     }
 }

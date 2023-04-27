@@ -1,4 +1,5 @@
 package towerDefense;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -60,5 +61,9 @@ public class Cat extends Image {
             canvas.add(cat, -50-50*spacer,260);
             spacer++;
         }
+    }
+
+    public double getRadius() {
+        return 25;
     }
 }
