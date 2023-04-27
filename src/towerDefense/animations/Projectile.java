@@ -1,23 +1,30 @@
 package towerDefense.animations;
 
 import java.awt.Color;
+import java.util.List;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Point;
-import towerDefense.Helpers;
+import towerDefense.*;
 
 public class Projectile extends GraphicsGroup implements Animation {
     private final double movementRate = 5, radius = 5, upperXBound, upperYBound;
-    private final Point destination;
+    private final Point destination, delta;
+    private final List<Cat> targets;
     private final CanvasWindow canvas;
 
-    public Projectile(Point origin, Point destination, double upperXBound, double upperYBound, CanvasWindow canvas) {
+    public Projectile(Point origin, Point destination, List<Cat> targets, CanvasWindow canvas) {
+        this.targets = targets;
         this.destination = destination;
-        this.upperXBound = upperXBound;
-        this.upperYBound = upperYBound;
+        this.upperXBound = canvas.getWidth();
+        this.upperYBound = canvas.getHeight();
         this.canvas = canvas;
+
+        Point vector = destination.subtract(origin);
+        vector = Helpers.divide(vector, vector.magnitude());
+        delta = Helpers.multiply(vector, movementRate);
         
         Ellipse shape = new Ellipse(0, 0, radius * 2, radius * 2);
         shape.setStroked(false);
@@ -32,12 +39,18 @@ public class Projectile extends GraphicsGroup implements Animation {
     }
     @Override
     public boolean step(double dt) {
-        if(!isInBounds() || Helpers.isInRange(getCenter(), destination, 5, 5)) { 
-                                                                //warning: arbitrary range and radius
+        if(!isInBounds()) {
             canvas.remove(this);
             return true;
         }
-        setCenter(Point.interpolate(getCenter(), destination, movementRate / getCenter().distance(destination)));
+        for(Cat cat : targets) {
+            //check collision
+            //set cat hit
+            //??
+            //remove
+            //return true
+        }
+        moveBy(delta);
         return false;
     }
 }

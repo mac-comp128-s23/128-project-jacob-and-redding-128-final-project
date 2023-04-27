@@ -38,7 +38,7 @@ public class BurstTower implements Tower {
             timeElapsed = 0;
             Cat target = null;
             for (Cat cat : cats) {
-                if (Helpers.isInRange(group.getCenter(), cat.getCenter(), range, cat.getRadius())) {
+                if (Helpers.isInRange(group.getCenter(), cat.getCenter(), range, cat.getRadius()) && !cat.isHit()) {
                     target = cat;
                     break;
                 }
@@ -48,8 +48,7 @@ public class BurstTower implements Tower {
             }
             gun.setRotation(Math.toDegrees(target.getCenter().subtract(group.getCenter()).angle()) + 90);
 
-            aniManager.add(new Projectile(group.getCenter(), target.getCenter(),
-                group.getCanvas().getWidth(), group.getCanvas().getHeight(), group.getCanvas()));
+            aniManager.add(new Projectile(group.getCenter(), target.getCenter(), cats, group.getCanvas()));
             return target;
         }
         return null;

@@ -11,7 +11,7 @@ public class AniManager {
     public AniManager(CanvasWindow canvas) {
         animations = new ArrayDeque<>();
 
-        canvas.animate((dt)->{
+        canvas.animate((dt) -> {
             int size = animations.size();
 
             for(int i=0; i<size; i++) {
