@@ -18,7 +18,7 @@ public class TowerDefense {
     private Cat cat;
     private Path path;
     private Button startGame;
-    private boolean running = false;
+    private boolean running = false, canPlace = false;
     private GraphicsGroup inGameText, gameOverGroup;
     private GraphicsText roundText, lifeText, startText, gameOver, gameOverScore;
     private Rectangle roundBackground, gameOverRec, lifeBackground;
@@ -88,18 +88,32 @@ public class TowerDefense {
         });
         canvas.onDrag((handler) -> { // drag and...
             if (movingTower != null) {
+                boolean touchingTower = false;
                 movingTower.getGroup().setCenter(handler.getPosition());
                 towerRange.setCenter(handler.getPosition());
-                if(path.getVisuals().testHit(towerRange.getCenter().getX(), towerRange.getCenter().getY())) {
+                for(Tower tower : towers) {
+                    if(tower.getGroup().testHit(towerRange.getCenter().getX(), towerRange.getCenter().getY())) {
+                        touchingTower = true;
+                        break;
+                    }
+                }
+                if(touchingTower || path.getVisuals().testHit(towerRange.getCenter().getX(), towerRange.getCenter().getY())) {
                     towerRange.setFillColor(Helpers.ERROR_CODE_RED);
+                    canPlace = false;
                 } else {
                     towerRange.setFillColor(Helpers.CLEAR_BLUE_SKIES);
+                    canPlace = true;
                 }
             }
         });
         canvas.onMouseUp((handler) -> { // drop!
             if(movingTower != null) {
-                towers.add(movingTower);
+                if(canPlace) {
+                    towers.add(movingTower);
+                } else {
+                    canvas.remove(movingTower.getGroup());
+                    // error text?
+                }
                 canvas.remove(towerRange);
                 movingTower = null;
                 createSampleTowers();
