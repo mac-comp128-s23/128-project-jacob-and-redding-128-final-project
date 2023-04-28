@@ -11,7 +11,7 @@ import edu.macalester.graphics.Image;
 
 public class BalloonTower implements Tower {
     private final double price = 700, radius = 25, range = 300;
-    private double fireRate = 1; // time between bursts
+    private double fireRate = 1.5; // time between bursts
     private double timeElapsed = 0;
     private Image base = new Image("Tower.png");
     private Image gun = new Image("Missile_Launcher.png");
