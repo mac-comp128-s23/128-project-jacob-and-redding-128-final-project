@@ -15,6 +15,8 @@ public interface Tower {
 
     double getRange();
 
+    double getPrice();
+
     /**
      * Returns the tower's visual information.
      * @return

@@ -20,10 +20,11 @@ public class TowerDefense {
     private Cat cat;
     private Path path;
     private Button startGame;
-    private boolean running = false, canPlace = false;
+    private boolean running = false, canPlace = false, roundOver = false;
     private GraphicsGroup inGameText, gameOverGroup;
-    private GraphicsText roundText, lifeText, startText, gameOver, gameOverScore;
-    private Rectangle roundBackground, gameOverRec, lifeBackground;
+    private GraphicsText roundText, lifeText, startText, gameOver, gameOverScore, priceText;
+    private Rectangle roundBackground, gameOverRec, lifeBackground, priceBackground;
+    private int bank = 750;
     private int round;
     private int life = 3;
     private Tower movingTower;
@@ -52,6 +53,8 @@ public class TowerDefense {
         gameOver = new GraphicsText();
         gameOverScore = new GraphicsText();
         gameOverGroup = new GraphicsGroup();
+        priceText = new GraphicsText();
+        enemyList = new ArrayList<Cat>();
         startGame();
         gameText();
 
@@ -63,6 +66,13 @@ public class TowerDefense {
             if (running) {
                 catBehavior();
                 towerBehavior(dt);
+                enemyListEmpty();
+            }
+            if(roundOver){
+                bank += 300;
+                priceText.setText("Bank: " + bank);
+                roundOver = false;
+                running = false;
             }
         });
         startGame.onClick(() -> { // button behavior
@@ -72,11 +82,11 @@ public class TowerDefense {
         });
         canvas.onMouseDown((handler) -> { // click on tower
             Point position = handler.getPosition();
-            if(handler.getModifiers().contains(ModifierKey.SHIFT)) {
-                upgradeTowerClick(position);
-            } else {
-                placeTowerClick(position);
-            }
+                if(handler.getModifiers().contains(ModifierKey.SHIFT)) {
+                    upgradeTowerClick(position);
+                } else {
+                    placeTowerClick(position);
+                }
         });
         canvas.onDrag((handler) -> { // drag and...
             if (movingTower != null) {
@@ -100,8 +110,11 @@ public class TowerDefense {
         });
         canvas.onMouseUp((handler) -> { // drop!
             if(movingTower != null) {
-                if(canPlace) {
-                    towers.add(movingTower);
+                if(movingTower.getPrice()<bank){
+                    if(canPlace) {
+                        towers.add(movingTower);
+                        lowerBank();
+                    }
                 } else {
                     canvas.remove(movingTower.getGroup());
                     // error text?
@@ -140,6 +153,16 @@ public class TowerDefense {
         lifeText.setText("Lives: " + life);
         lifeText.setPosition(570, 100);
         inGameText.add(lifeText);
+
+        priceBackground = new Rectangle(560, 120, 175, 40);
+        priceBackground.setFilled(true);
+        priceBackground.setFillColor(Color.white);
+        inGameText.add(priceBackground);
+
+        priceText.setFont(FontStyle.BOLD, 30);
+        priceText.setText("Bank: " + bank);
+        priceText.setPosition(560, 150);
+        inGameText.add(priceText);
 
         startText.setFont(FontStyle.BOLD, 10);
         startText.setText("Start Here!");
@@ -242,6 +265,17 @@ public class TowerDefense {
                 next.upgrade();
                 return;
             }
+        }
+    }
+
+    private void lowerBank() {
+        bank -= movingTower.getPrice();
+        priceText.setText("Bank: " + bank);
+    }
+
+    private void enemyListEmpty(){
+        if(enemyList.isEmpty()){
+            roundOver = true;
         }
     }
 }
