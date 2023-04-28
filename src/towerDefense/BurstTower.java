@@ -61,6 +61,10 @@ public class BurstTower implements Tower {
         return group;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public void upgrade() {
         fireRate = 0.2;
         gun.setImagePath("Cannon2.png");
