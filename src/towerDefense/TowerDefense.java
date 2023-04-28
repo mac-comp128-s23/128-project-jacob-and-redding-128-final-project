@@ -26,6 +26,7 @@ public class TowerDefense {
     private Rectangle roundBackground, gameOverRec, lifeBackground, priceBackground, towerPriceBack, upgradeBack;
     private int bank = 750;
     private int upgradePrice = 850;
+    private int roundOverMoney = 300;
     private int round;
     private int life = 3;
     private Tower movingTower;
@@ -72,7 +73,7 @@ public class TowerDefense {
                 roundOver();
             }
             if(roundOver){
-                bank += 300;
+                bank += roundOverMoney;
                 priceText.setText("Bank: " + bank);
                 roundOver = false;
                 running = false;
