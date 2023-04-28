@@ -27,7 +27,7 @@ public class TowerDefense {
     private int upgradePrice = 850;
     private int roundOverMoney = 300;
     private int round;
-    private int life = 3;
+    private int life = 10;
     private Tower movingTower;
     private List<Tower> exampleTowers, towers;
     public ArrayList<Cat> enemyList;
