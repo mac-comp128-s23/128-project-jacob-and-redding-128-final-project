@@ -12,7 +12,7 @@ public class Cat extends Image {
 
     private Deque<Point> pathPoints;
     private double stepSize = 5;
-    private boolean running = true, isHit = false;
+    private boolean isHit = false;
     public ArrayList<Cat> enemies;
     private AniManager aniManager;
     

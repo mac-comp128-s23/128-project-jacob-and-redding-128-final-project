@@ -7,9 +7,9 @@ import edu.macalester.graphics.*;
 
 public class Path {
     private GraphicsGroup visuals;
-    private  Rectangle pathRectangle;
+    private Rectangle pathRectangle;
     private Rectangle dragRectangle;
-    private  Deque<Point> points;
+    private Deque<Point> points;
 
     public Path(){
         visuals = new GraphicsGroup();
