@@ -8,7 +8,7 @@ import towerDefense.animations.Projectile;
 
 public class BurstTower implements Tower {
     private final double price = 500, radius = 25, range = 100;
-    private final double fireRate = 0.5; // time between bursts
+    private double fireRate = 0.5; // time between bursts
     private double timeElapsed = 0;
     private Image base = new Image("Tower.png");
     private Image gun = new Image("Cannon.png");
@@ -59,5 +59,10 @@ public class BurstTower implements Tower {
     }
     public GraphicsGroup getGroup() {
         return group;
+    }
+
+    public void upgrade() {
+        fireRate = 0.2;
+        gun.setImagePath("Cannon2.png");
     }
 }

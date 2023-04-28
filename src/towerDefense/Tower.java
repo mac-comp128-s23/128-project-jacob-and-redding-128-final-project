@@ -20,4 +20,6 @@ public interface Tower {
      * @return
      */
     GraphicsGroup getGroup();
+
+    void upgrade();
 }

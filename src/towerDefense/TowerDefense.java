@@ -7,6 +7,8 @@ import java.util.List;
 
 import towerDefense.animations.AniManager;
 import edu.macalester.graphics.*;
+import edu.macalester.graphics.events.Key;
+import edu.macalester.graphics.events.ModifierKey;
 import edu.macalester.graphics.ui.*;
 
 public class TowerDefense {
@@ -70,20 +72,10 @@ public class TowerDefense {
         });
         canvas.onMouseDown((handler) -> { // click on tower
             Point position = handler.getPosition();
-
-            Iterator<Tower> itr = exampleTowers.iterator();
-            while (itr.hasNext()) {
-                Tower next = itr.next();
-                if (next.getGroup().testHit(position.getX(), position.getY())) {
-                    movingTower = next;
-
-                    towerRange = new Ellipse(0, 0, movingTower.getRange() * 2, movingTower.getRange() * 2);
-                    towerRange.setFillColor(Helpers.CLEAR_BLUE_SKIES);
-                    towerRange.setCenter(movingTower.getGroup().getCenter());
-                    canvas.add(towerRange);
-                    canvas.add(movingTower.getGroup());
-                    itr.remove();
-                }
+            if(handler.getModifiers().contains(ModifierKey.SHIFT)) {
+                upgradeTowerClick(position);
+            } else {
+                placeTowerClick(position);
             }
         });
         canvas.onDrag((handler) -> { // drag and...
@@ -223,6 +215,33 @@ public class TowerDefense {
     private void towerBehavior(double dt) {
         for(Tower tower : towers) {
             tower.step(dt, enemyList);
+        }
+    }
+    
+    private void placeTowerClick(Point mousePos) {
+        Iterator<Tower> itr = exampleTowers.iterator();
+        while (itr.hasNext()) {
+            Tower next = itr.next();
+            if (next.getGroup().testHit(mousePos.getX(), mousePos.getY())) {
+                movingTower = next;
+                towerRange = new Ellipse(0, 0, movingTower.getRange() * 2, movingTower.getRange() * 2);
+                towerRange.setFillColor(Helpers.CLEAR_BLUE_SKIES);
+                towerRange.setCenter(movingTower.getGroup().getCenter());
+                canvas.add(towerRange);
+                canvas.add(movingTower.getGroup());
+                itr.remove();
+            }
+        }
+    }
+
+    private void upgradeTowerClick(Point mousePos) {
+        Iterator<Tower> itr = towers.iterator();
+        while (itr.hasNext()) {
+            Tower next = itr.next();
+            if (next.getGroup().testHit(mousePos.getX(), mousePos.getY())) {
+                next.upgrade();
+                return;
+            }
         }
     }
 }
