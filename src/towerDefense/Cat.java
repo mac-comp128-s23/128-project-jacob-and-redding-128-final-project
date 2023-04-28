@@ -6,7 +6,7 @@ import java.util.Deque;
 
 import edu.macalester.graphics.*;
 import towerDefense.animations.AniManager;
-import towerDefense.animations.Delay;
+//import towerDefense.animations.Delay;
 
 public class Cat extends Image {
 
