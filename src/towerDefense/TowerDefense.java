@@ -7,7 +7,6 @@ import java.util.List;
 
 import towerDefense.animations.AniManager;
 import edu.macalester.graphics.*;
-import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.events.ModifierKey;
 import edu.macalester.graphics.ui.*;
 
@@ -234,6 +233,10 @@ public class TowerDefense {
         Tower exampleBurst = new BurstTower(600, 200, aniManager);
         exampleTowers.add(exampleBurst);
         canvas.add(exampleBurst.getGroup());
+
+        Tower exampleBalloon = new BalloonTower(670, 200, aniManager);
+        exampleTowers.add(exampleBalloon);
+        canvas.add(exampleBalloon.getGroup());
     }
 
     private int getLife() {
