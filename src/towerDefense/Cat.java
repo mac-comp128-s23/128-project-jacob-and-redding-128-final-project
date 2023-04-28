@@ -58,7 +58,7 @@ public class Cat extends Image {
     private void addEnemiesToCanvas(CanvasWindow canvas, ArrayList<Cat> catList ) { // see above comment
         int spacer = 1;
         for(Cat cat : catList){
-            canvas.add(cat, -50-50*spacer,260);
+            canvas.add(cat, -50-70*spacer,260);
             spacer++;
         }
     }
