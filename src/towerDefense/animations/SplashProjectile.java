@@ -5,6 +5,7 @@ import java.util.List;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 import towerDefense.Cat;
 import java.awt.Color;
@@ -14,7 +15,7 @@ import java.awt.Color;
  * @author ReddSaut
  */
 public class SplashProjectile extends GraphicsGroup implements Animation {
-    private final double movementRate = 7, radius = 7;
+    private final double movementRate = 7, radius = 10;
     private final List<Cat> targets;
     private final CanvasWindow canvas;
     private final Point destination;
@@ -26,10 +27,10 @@ public class SplashProjectile extends GraphicsGroup implements Animation {
         this.destination = destination;
         this.aniManager = aniManager;
 
-        Ellipse shape = new Ellipse(0, 0, radius * 2, radius * 2);
-        shape.setStroked(false);
-        shape.setFillColor(Color.CYAN);
-        add(shape);
+        Image balloon = new Image("Red_Balloon.png");
+        balloon.setMaxHeight(radius * 2);
+        balloon.setRotation(Math.random() * 360);
+        add(balloon);
         setCenter(origin);
         canvas.add(this);
     }
