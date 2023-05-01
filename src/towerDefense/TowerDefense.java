@@ -2,8 +2,10 @@ package towerDefense;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import towerDefense.animations.AniManager;
 import edu.macalester.graphics.*;
@@ -34,7 +36,7 @@ public class TowerDefense {
     private int round;
     private int life = 10;
     private Tower movingTower;
-    private List<Tower> exampleTowers, towers;
+    private Set<Tower> exampleTowers, towers;
     public ArrayList<Cat> enemyList;
     private AniManager aniManager;
     private Ellipse towerRange;
@@ -46,8 +48,8 @@ public class TowerDefense {
     public TowerDefense() {
         canvas = new CanvasWindow("Tower Defense!", CANVAS_WIDTH, CANVAS_HEIGHT);
         aniManager = new AniManager(canvas);
-        towers = new ArrayList<>();
-        exampleTowers = new ArrayList<>(4);
+        towers = new HashSet<>();
+        exampleTowers = new HashSet<>(4);
         path = new Path();
         canvas.add(path.getVisuals());
         cat = new Cat(path.getPoints().peek().getX() - 50, path.getPoints().peek().getY(), 5, path, aniManager);
