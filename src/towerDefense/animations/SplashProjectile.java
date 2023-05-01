@@ -3,12 +3,10 @@ package towerDefense.animations;
 import java.util.List;
 
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 import towerDefense.Cat;
-import java.awt.Color;
 
 /**
  * A projectile used by BalloonTower. Has no collision and is mostly visual.
