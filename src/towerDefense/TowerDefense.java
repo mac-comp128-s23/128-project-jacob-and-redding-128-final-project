@@ -21,10 +21,11 @@ public class TowerDefense {
     private Button startGame;
     private boolean running = false, canPlace = false, roundOver = false;
     private GraphicsGroup inGameText, gameOverGroup;
-    private GraphicsText roundText, lifeText, startText, gameOver, gameOverScore, priceText, priceTowerText, upgradeText;
-    private Rectangle roundBackground, gameOverRec, lifeBackground, priceBackground, towerPriceBack, upgradeBack;
+    private GraphicsText roundText, lifeText, startText, gameOver, gameOverScore, priceText, priceTowerText, upgradeText, ballonTowerText, priceBalloonText, upgrade2Text;
+    private Rectangle roundBackground, gameOverRec, lifeBackground, priceBackground, towerPriceBack, upgradeBack, ballonTowerBack, upgrade2Back;
     private int bank = 750;
     private int upgradePrice = 850;
+    private int upgradePrice2 = 1200;
     private int roundOverMoney = 300;
     private int round;
     private int life = 10;
@@ -57,6 +58,8 @@ public class TowerDefense {
         priceText = new GraphicsText();
         priceTowerText = new GraphicsText();
         upgradeText = new GraphicsText();
+        ballonTowerText = new GraphicsText();
+        upgrade2Text = new GraphicsText();
         enemyList = new ArrayList<Cat>();
         startGame();
         gameText();
@@ -89,7 +92,6 @@ public class TowerDefense {
                     if(upgradePrice <= bank){
                         upgradeTowerClick(position);
                         bank -= upgradePrice;
-                        System.out.println("running");
                         priceText.setText("Bank: " + bank);
                     }
                 } else {
@@ -191,6 +193,26 @@ public class TowerDefense {
         upgradeText.setText("Upgrade: " + upgradePrice);
         upgradeText.setPosition(523, 305);
         inGameText.add(upgradeText);
+
+        ballonTowerBack = new Rectangle(640, 260, 100, 20);
+        ballonTowerBack.setFilled(true);
+        ballonTowerBack.setFillColor(Color.white);
+        inGameText.add(ballonTowerBack);
+
+        upgrade2Back = new Rectangle(640, 290, 110, 20);
+        upgrade2Back.setFilled(true);
+        upgrade2Back.setFillColor(Color.white);
+        inGameText.add(upgrade2Back);
+
+        ballonTowerText.setFont(FontStyle.BOLD, 14);
+        ballonTowerText.setText("Price: " + 700);
+        ballonTowerText.setPosition(650, 275);
+        inGameText.add(ballonTowerText);
+
+        upgrade2Text.setFont(FontStyle.BOLD,14);
+        upgrade2Text.setText("Upgrade: " + upgradePrice2);
+        upgrade2Text.setPosition(643, 305);
+        inGameText.add(upgrade2Text);
 
         startText.setFont(FontStyle.BOLD, 10);
         startText.setText("Start Here!");
