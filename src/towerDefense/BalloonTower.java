@@ -3,12 +3,15 @@ package towerDefense;
 import java.util.List;
 
 import towerDefense.animations.AniManager;
-import towerDefense.animations.Projectile;
-import towerDefense.animations.SplashEffect;
 import towerDefense.animations.SplashProjectile;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Image;
 
+/**
+ * An area-of-effect type tower with a large range and a slow rate of fire.
+ * @author ReddSaut
+ * Images from https://opengameart.org/users/nido
+ */
 public class BalloonTower implements Tower {
     private final double price = 700, radius = 25, range = 300;
     private double fireRate = 1.5; // time between bursts

@@ -10,12 +10,23 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Point;
 import towerDefense.*;
 
+/**
+ * A projectile used exclusively by the BurstTower class
+ * @author ReddSaut
+ */
 public class Projectile extends GraphicsGroup implements Animation {
     private final double movementRate = 5, radius = 5, upperXBound, upperYBound;
     private final Point delta;
     private final List<Cat> targets;
     private final CanvasWindow canvas;
 
+    /**
+     * This will remove up to one target from the passed list on collision
+     * @param origin
+     * @param destination
+     * @param targets
+     * @param canvas
+     */
     public Projectile(Point origin, Point destination, List<Cat> targets, CanvasWindow canvas) {
         this.targets = targets;
         this.upperXBound = canvas.getWidth();

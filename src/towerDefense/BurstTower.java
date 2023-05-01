@@ -6,6 +6,11 @@ import edu.macalester.graphics.*;
 import towerDefense.animations.AniManager;
 import towerDefense.animations.Projectile;
 
+/**
+ * A basic defense unit which supports a single upgrade.
+ * @author ReddSaut, Jacob Hellenbrand
+ * Images from https://opengameart.org/users/nido
+ */
 public class BurstTower implements Tower {
     private final double price = 500, radius = 25, range = 100;
     private double fireRate = 0.5; // time between bursts

@@ -9,6 +9,10 @@ import edu.macalester.graphics.Point;
 import towerDefense.Cat;
 import java.awt.Color;
 
+/**
+ * A projectile used by BalloonTower. Has no collision and is mostly visual.
+ * @author ReddSaut
+ */
 public class SplashProjectile extends GraphicsGroup implements Animation {
     private final double movementRate = 7, radius = 7;
     private final List<Cat> targets;

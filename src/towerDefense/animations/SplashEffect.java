@@ -9,6 +9,11 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Point;
 import towerDefense.Cat;
 
+/**
+ * The water splash effect used exclusively by the
+ * SplashProjectile of the BalloonTower class.
+ * @author ReddSaut
+ */
 public class SplashEffect extends GraphicsGroup implements Animation {
     private Ellipse shape;
     private final CanvasWindow canvas;
@@ -18,6 +23,12 @@ public class SplashEffect extends GraphicsGroup implements Animation {
     private int alpha = 255;
     private final double MAX_RUNTIME = 0.25;
 
+    /**
+     * This class will remove any number of targets from the given list on collision.
+     * @param position
+     * @param targets
+     * @param canvas
+     */
     public SplashEffect(Point position, List<Cat> targets, CanvasWindow canvas) {
         this.canvas = canvas;
         this.targets = targets;

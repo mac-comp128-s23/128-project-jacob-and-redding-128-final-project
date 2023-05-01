@@ -6,8 +6,11 @@ import java.util.Deque;
 
 import edu.macalester.graphics.*;
 import towerDefense.animations.AniManager;
-//import towerDefense.animations.Delay;
 
+/**
+ * A basic enemy unit
+ * @author Jacob Hellenbrand
+ */
 public class Cat extends Image {
 
     private Deque<Point> pathPoints;
@@ -34,6 +37,10 @@ public class Cat extends Image {
         return pathPoints.isEmpty();
     }
 
+    /**
+     * Per-frame behavior of a cat object
+     * @param canvas
+     */
     public void step(CanvasWindow canvas) { 
         Point center = getCenter();
         Point target = pathPoints.peek();
@@ -45,7 +52,13 @@ public class Cat extends Image {
         setCenter(Point.interpolate(center, target, stepSize / center.distance(target)));
     }
 
-    public ArrayList<Cat> createEnemies(Path path, int round) { // TODO: should this be in the main class?
+    /**
+     * Creates a full list of Cat enemies. The lead cat will call their friends to join the fight!
+     * @param path
+     * @param round
+     * @return
+     */
+    public ArrayList<Cat> createEnemies(Path path, int round) {
         double numCats = round * round;
         enemies = new ArrayList<Cat>();
         while(numCats >= enemies.size()) {
@@ -55,7 +68,7 @@ public class Cat extends Image {
         return enemies;
     }
 
-    private void addEnemiesToCanvas(CanvasWindow canvas, ArrayList<Cat> catList ) { // see above comment
+    private void addEnemiesToCanvas(CanvasWindow canvas, ArrayList<Cat> catList ) {
         int spacer = 1;
         for(Cat cat : catList){
             canvas.add(cat, -50-70*spacer,260);
@@ -63,12 +76,16 @@ public class Cat extends Image {
         }
     }
 
+    /**
+     * A cat will run away when it is hit
+     */
     public void hit() {
         isHit = true;
         pathPoints.clear();
         pathPoints.offer(getCenter().withX(-300));
         setScale(-1, 1);
     }
+
     public boolean isHit() {
         return isHit;
     }

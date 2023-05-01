@@ -5,6 +5,10 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import edu.macalester.graphics.*;
 
+/**
+ * A path cats follow and towers politely cannot be placed on
+ * @author Jacob Hellenbrand
+ */
 public class Path {
     private GraphicsGroup visuals;
     private Rectangle pathRectangle;

@@ -5,6 +5,11 @@ import java.util.Deque;
 
 import edu.macalester.graphics.CanvasWindow;
 
+/**
+ * Runs animation objects. Internally uses an 
+ * ArrayDeque as a per-frame animation queue
+ * @author ReddSaut
+ */
 public class AniManager {
     Deque<Animation> animations;
 
@@ -23,6 +28,10 @@ public class AniManager {
         });
     }
 
+    /**
+     * adds the given animation object to the rear of the queue
+     * @param a
+     */
     public void add(Animation a) {
         if(a == null) {
             return;
@@ -30,7 +39,7 @@ public class AniManager {
         animations.offer(a);
     }
 
-    public boolean contains(Animation a) { //Override with searching by type?
+    public boolean contains(Animation a) {
         return animations.contains(a);
     }
 

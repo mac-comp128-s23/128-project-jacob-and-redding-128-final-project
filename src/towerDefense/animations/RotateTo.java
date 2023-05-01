@@ -2,6 +2,10 @@ package towerDefense.animations;
 
 import edu.macalester.graphics.GraphicsObject;
 
+/**
+ * Smoothly rotates a given context.
+ * @author ReddSaut
+ */
 public class RotateTo implements Animation {
     private final double startAngle, endAngle, totalAngle, maxRuntime = 5; //hardcoded runtime param
     private final GraphicsObject context;

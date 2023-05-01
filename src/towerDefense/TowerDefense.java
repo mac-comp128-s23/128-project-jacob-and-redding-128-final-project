@@ -10,6 +10,10 @@ import edu.macalester.graphics.*;
 import edu.macalester.graphics.events.ModifierKey;
 import edu.macalester.graphics.ui.*;
 
+/**
+ * Main class, runs a game of tower defense
+ * @author Jacob Hellenbrand, ReddSaut
+ */
 public class TowerDefense {
 
     public static final int CANVAS_WIDTH = 800;
@@ -21,7 +25,7 @@ public class TowerDefense {
     private Button startGame;
     private boolean running = false, canPlace = false, roundOver = false;
     private GraphicsGroup inGameText, gameOverGroup;
-    private GraphicsText roundText, lifeText, startText, gameOver, gameOverScore, priceText, priceTowerText, upgradeText, ballonTowerText, priceBalloonText, upgrade2Text;
+    private GraphicsText roundText, lifeText, startText, gameOver, gameOverScore, priceText, priceTowerText, upgradeText, ballonTowerText, upgrade2Text;
     private Rectangle roundBackground, gameOverRec, lifeBackground, priceBackground, towerPriceBack, upgradeBack, ballonTowerBack, upgrade2Back;
     private int bank = 750;
     private int upgradePrice = 850;
